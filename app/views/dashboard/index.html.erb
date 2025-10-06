@@ -1,0 +1,175 @@
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="row py-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="fw-bold text-white mb-1">
+            <i class="fas fa-paw me-2"></i>Dashboard
+          </h1>
+          <p class="text-white-50 mb-0">Bem-vindo, <%= current_user.email %>!</p>
+          <p class="text-white-50 mb-0">
+            <% sub = current_user.subscription %>
+            <i class="fas fa-<%= sub&.trial? ? 'clock' : 'check-circle' %> me-1"></i>
+            <%= current_user.current_plan %>
+            <% if sub&.trial? %>
+              - <%= current_user.days_remaining %> dias restantes
+            <% end %>
+          </p>
+        </div>
+        <div class="d-flex gap-2">
+          <%= link_to "Planos", subscriptions_path, 
+              class: "btn btn-primary pet-btn" %>
+          <%= link_to "Sair", destroy_user_session_path, method: :delete, 
+              class: "btn btn-outline-light pet-btn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-4 mb-5">
+    <div class="col-lg-3 col-md-6">
+      <div class="pet-card p-4 text-center">
+        <i class="fas fa-calendar-check text-primary mb-3" style="font-size: 2.5rem;"></i>
+        <h3 class="fw-bold text-primary mb-1">12</h3>
+        <p class="text-muted mb-0">Agendamentos</p>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6">
+      <div class="pet-card p-4 text-center">
+        <i class="fas fa-paw text-primary mb-3" style="font-size: 2.5rem;"></i>
+        <h3 class="fw-bold text-primary mb-1">3</h3>
+        <p class="text-muted mb-0">Pets Cadastrados</p>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6">
+      <div class="pet-card p-4 text-center">
+        <i class="fas fa-star text-primary mb-3" style="font-size: 2.5rem;"></i>
+        <h3 class="fw-bold text-primary mb-1">4.8</h3>
+        <p class="text-muted mb-0">Avaliação Média</p>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6">
+      <div class="pet-card p-4 text-center">
+        <i class="fas fa-bell text-primary mb-3" style="font-size: 2.5rem;"></i>
+        <h3 class="fw-bold text-primary mb-1">5</h3>
+        <p class="text-muted mb-0">Lembretes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="row g-4">
+    <!-- Próximos Agendamentos -->
+    <div class="col-lg-8">
+      <div class="pet-card p-4">
+        <h4 class="fw-bold text-primary mb-4">
+          <i class="fas fa-calendar-alt me-2"></i>Próximos Agendamentos
+        </h4>
+        
+        <div class="list-group list-group-flush">
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold mb-1">Banho e Tosa - Rex</h6>
+                <p class="text-muted mb-0">Amanhã, 14:00</p>
+              </div>
+              <span class="badge bg-primary">Confirmado</span>
+            </div>
+          </div>
+          
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold mb-1">Consulta Veterinária - Luna</h6>
+                <p class="text-muted mb-0">Quinta-feira, 10:30</p>
+              </div>
+              <span class="badge bg-warning">Pendente</span>
+            </div>
+          </div>
+          
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold mb-1">Vacinação - Max</h6>
+                <p class="text-muted mb-0">Sexta-feira, 16:00</p>
+              </div>
+              <span class="badge bg-success">Agendado</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <%= link_to "Ver Todos", "#", class: "btn btn-outline-primary pet-btn" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-lg-4">
+      <div class="pet-card p-4">
+        <h4 class="fw-bold text-primary mb-4">
+          <i class="fas fa-bolt me-2"></i>Ações Rápidas
+        </h4>
+        
+        <div class="d-grid gap-3">
+          <%= link_to "Novo Agendamento", "#", 
+              class: "btn btn-primary pet-btn fw-bold" %>
+          <%= link_to "Cadastrar Pet", "#", 
+              class: "btn btn-outline-primary pet-btn fw-bold" %>
+          <%= link_to "Histórico", "#", 
+              class: "btn btn-outline-primary pet-btn fw-bold" %>
+          <%= link_to "Configurações", "#", 
+              class: "btn btn-outline-primary pet-btn fw-bold" %>
+        </div>
+      </div>
+
+      <!-- Pets Cadastrados -->
+      <div class="pet-card p-4 mt-4">
+        <h5 class="fw-bold text-primary mb-3">
+          <i class="fas fa-paw me-2"></i>Meus Pets
+        </h5>
+        
+        <div class="list-group list-group-flush">
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-dog text-primary me-3" style="font-size: 1.5rem;"></i>
+              <div>
+                <h6 class="fw-bold mb-0">Rex</h6>
+                <small class="text-muted">Golden Retriever</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-cat text-primary me-3" style="font-size: 1.5rem;"></i>
+              <div>
+                <h6 class="fw-bold mb-0">Luna</h6>
+                <small class="text-muted">Siamês</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="list-group-item border-0 px-0">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-dog text-primary me-3" style="font-size: 1.5rem;"></i>
+              <div>
+                <h6 class="fw-bold mb-0">Max</h6>
+                <small class="text-muted">Labrador</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-3">
+          <%= link_to "Gerenciar Pets", "#", class: "btn btn-outline-primary btn-sm pet-btn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

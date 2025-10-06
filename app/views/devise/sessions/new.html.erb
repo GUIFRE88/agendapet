@@ -1,0 +1,104 @@
+<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
+  <div class="row w-100">
+    <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
+      <div class="pet-card p-5 position-relative">
+        <!-- Decorative elements -->
+        <i class="fas fa-paw pet-decoration top-left"></i>
+        <i class="fas fa-heart pet-decoration bottom-right"></i>
+        
+        <div class="text-center mb-4">
+          <i class="fas fa-paw pet-icon"></i>
+          <h2 class="fw-bold text-primary mb-2">AgendaPet</h2>
+          <p class="text-muted">Sistema de Agendamento para Pet Shop</p>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f| %>
+          <div class="mb-4">
+            <label for="user_email" class="form-label fw-semibold">
+              <i class="fas fa-envelope me-2 text-primary"></i>Email
+            </label>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+                class: "form-control pet-input", 
+                placeholder: "Digite seu email",
+                required: true %>
+            <div class="invalid-feedback">
+              Por favor, insira um email válido.
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="user_password" class="form-label fw-semibold">
+              <i class="fas fa-lock me-2 text-primary"></i>Senha
+            </label>
+            <%= f.password_field :password, autocomplete: "current-password", 
+                class: "form-control pet-input", 
+                placeholder: "Digite sua senha",
+                required: true %>
+            <div class="invalid-feedback">
+              Por favor, insira sua senha.
+            </div>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="mb-4">
+              <div class="form-check">
+                <%= f.check_box :remember_me, class: "form-check-input" %>
+                <%= f.label :remember_me, "Lembrar de mim", class: "form-check-label" %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="d-grid mb-4">
+            <%= f.submit "Entrar", class: "btn btn-primary pet-btn text-white fw-bold" %>
+          </div>
+        <% end %>
+
+        <div class="text-center">
+          <p class="text-muted mb-3">Não tem uma conta?</p>
+          <%= link_to "Criar conta", new_user_registration_path, 
+              class: "btn btn-outline-primary pet-btn fw-bold" %>
+        </div>
+
+        <div class="text-center mt-4">
+          <%= link_to "Esqueceu sua senha?", new_user_password_path, 
+              class: "text-decoration-none text-primary" %>
+        </div>
+
+        <!-- Pet shop features -->
+        <div class="row mt-5 text-center">
+          <div class="col-4">
+            <i class="fas fa-calendar-alt text-primary mb-2"></i>
+            <small class="d-block text-muted">Agendamentos</small>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-paw text-primary mb-2"></i>
+            <small class="d-block text-muted">Pet Care</small>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-heart text-primary mb-2"></i>
+            <small class="d-block text-muted">Amor pelos Pets</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Bootstrap form validation
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
